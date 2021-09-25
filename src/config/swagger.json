@@ -1,0 +1,1277 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Nahual API",
+        "description": "Nahual API",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:8000",
+    "basePath": "/api",
+    "tags": [
+        {
+            "name": "Egresades",
+            "description": "API para egresades en el sistema"
+        },
+        {
+            "name": "Estudiantes",
+            "description": "API para estudiantes en el sistema"
+        },
+        {
+            "name": "Cursos",
+            "description": "API para cursos"
+        },
+        {
+            "name": "Estados",
+            "description": "API para Estado de Cursos"
+        },
+        {
+            "name": "Inscriptos",
+            "description": "API para Inscriptos a Cursos"
+        },
+        {
+            "name": "NivelIngles",
+            "description": "API para obtener los niveles de Ingles"
+        },
+        {
+            "name": "Nodos",
+            "description": "API para Nodos"
+        },
+        {
+            "name": "Sedes",
+            "description": "API para Sedes"
+        },
+        {
+            "name": "Topicos",
+            "description": "API de todos los topicos"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/egresades/desempleados": {
+            "get": {
+                "tags": [
+                    "Egresades"
+                ],
+                "summary": "Obtener todos los egresades desempleades",
+                "description": "Obtener todos los egresades desempleades",
+                "parameters": [
+                    {
+                        "name": "modulo",
+                        "in": "query",
+                        "description": "Filtrar por modulo",
+                        "type": "string"
+                    },
+                    {
+                        "name": "nivelIngles",
+                        "in": "query",
+                        "description": "Filtrar por nivel de ingles",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/egresadesDesempleados"
+                        }
+                    }
+                }
+            }
+        },
+        "/estudiantes": {
+            "get": {
+                "tags": [
+                    "Estudiantes"
+                ],
+                "summary": "Obtener toda la informacion de los estudiantes",
+                "description": "Obtener toda la informacion de los estudiantes",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID de un estudiante",
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Estudiante"
+                        }
+                    }
+                }
+            }
+        },
+        "/estudiantes/{id}": {
+            "get": {
+                "tags": [
+                    "Estudiantes"
+                ],
+                "summary": "Obtener toda la informacion de un estudiante",
+                "description": "Obtener toda la informacion de un estudiante",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID de un estudiante",
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Estudiante"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Estudiantes"
+                ],
+                "summary": "Enviar la informacion de un estudiante",
+                "description": "Enviar la informacion de un estudiante",
+                "parameters": [
+                    {
+                        "name": "Estudiante a guardar",
+                        "in": "body",
+                        "description": "Toda la informacion de un estudiante",
+                        "schema": {
+                            "$ref": "#/definitions/EstudianteSinId"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "El estudiante fue creado exitosamente",
+                        "schema": {
+                            "$ref": "#/definitions/EstudianteSinId"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Estudiantes"
+                ],
+                "summary": "Editar toda la informacion de un estudiante especifico",
+                "description": "Editar toda la informacion de un estudiante especifico",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID del estudiante",
+                        "type": "integer"
+                    },
+                    {
+                        "name": "estudiante",
+                        "in": "body",
+                        "description": "Toda la informacion actualizada de un estudiante",
+                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/EstudianteSinId"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "La informacion del estudiante fue actualizada exitosamente",
+                        "schema": {
+                            "$ref": "#/definitions/EstudianteSinId"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Estudiantes"
+                ],
+                "summary": "Elimina a un estudiante especifico",
+                "description": "Elimina a un estudiante especifico",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID del estudiante",
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Estudiante fue eliminado exitosamente."
+                    }
+                }
+            }
+        },
+        "/cursos": {
+            "get": {
+                "tags": [
+                    "Cursos"
+                ],
+                "summary": "Obtiene todos los cursos registrados hasta el momento",
+                "description": "Obtiene todos lus cursos registrados hasta el momento",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Cursos"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Cursos"
+                ],
+                "summary": "Crea un nuevo curso",
+                "description": "Crea un nuevo curso",
+                "parameters": [
+                    {
+                        "name": "Curso nuevo",
+                        "in": "body",
+                        "description": "Toda la informacion de un curso",
+                        "schema": {
+                            "$ref": "#/definitions/CursoAGuardar"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "El curso fue creado exitosamente",
+                        "schema": {
+                            "$ref": "#/definitions/Cursos"
+                        }
+                    }
+                }
+            }
+        },
+        "/cursos/{id}": {
+            "get": {
+                "tags": [
+                    "Cursos"
+                ],
+                "summary": "Muestra un curso en especifico",
+                "description": "Muestra un curso en especifico por el id del URL",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID del curso",
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "El curso fue editado exitosamente",
+                        "schema": {
+                            "$ref": "#/definitions/Curso"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Cursos"
+                ],
+                "summary": "Editar toda la informacion de un curso especifico",
+                "description": "Editar toda la informacion de un curso especifico",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID del curso",
+                        "type": "integer"
+                    },
+                    {
+                        "name": "Curso nuevo",
+                        "in": "body",
+                        "description": "Toda la informacion de un curso",
+                        "schema": {
+                            "$ref": "#/definitions/CursoEditar"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "El curso fue editado exitosamente",
+                        "schema": {
+                            "$ref": "#/definitions/Curso"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Cursos"
+                ],
+                "summary": "Elimina un curso en especifico",
+                "description": "Elimina un curso en especifco por el iD en el URL",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID del curso",
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "El curso fue eliminado exitosamente"
+                    }
+                }
+            }
+        },
+        "/estados":{
+            "get": {
+                "tags": [
+                    "Estados"
+                ],
+                "summary": "Obtener todos los estados posibles de un Estudiante",
+                "description": "Obtener todos los estados",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "ID de un estado",
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Estados"
+                        }
+                    }
+                }
+            }
+        },
+        "/nivel-ingles":{
+            "get": {
+                "tags": [
+                    "NivelIngles"
+                ],
+                "summary": "Obtener todos los niveles de ingles",
+                "description": "Obtener todos los niveles de ingles",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "ID de un nivel de ingles",
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/NivelesIngles"
+                        }
+                    }
+                }
+            }
+        },
+        "/inscriptos": {
+            "get": {
+                "tags": [
+                    "Inscriptos"
+                ],
+                "summary": "Obtener toda la informacion de un inscripto",
+                "description": "Obtener toda la informacion de un inscripto",
+                "parameters": [
+                    {
+                        "name": "estudianteId",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID de un estudiante",
+                        "type": "integer"
+                    },
+                    {
+                        "name": "cursoId",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID de un curso",
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Inscriptos"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Inscriptos"
+                ],
+                "summary": "Enviar la informacion de muchos inscriptos",
+                "description": "Enviar la informacion de muchos inscriptos",
+                "parameters": [
+                    {
+                        "name": "Lista de inscriptos [{inscripto#1},{inscripto#2},{inscripto#3}]",
+                        "in": "body",
+                        "description": "Toda la informacion de muchos inscriptos",
+                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/Inscriptos"
+                        }
+                    },
+                    {
+                        "name": "cursoId",
+                        "in": "body",
+                        "description": "Curso al que pertenece la inscripciones",
+                        "type": "integer",
+                        "schema": {
+                            "$ref": "#/definitions/Curso"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Se registro correctamente"
+                    }
+                }
+            }
+        },
+        "/nodos": {
+            "get": {
+                "tags": [
+                    "Nodos"
+                ],
+                "summary": "Obtener todos los nodos de sedes",
+                "description": "Obtener todos los nodos de sedes",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "ID de Nodo",
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Nodos"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Nodos"
+                ],
+                "summary": "Enviar la informacion de un nodo",
+                "description": "Enviar la informacion de un nodo",
+                "parameters": [
+                    {
+                        "name": "Nodo a guardar",
+                        "in": "body",
+                        "description": "Toda la informacion de un nodo",
+                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/NodoAGuardar"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "El nodo fue creado exitosamente"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Nodos"
+                ],
+                "summary": "Actualizar informacion de un nodo especifico",
+                "description": "Actualizar informacion de un nodo especifico",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID del nodo",
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "La informacion del nodo fue actualizada exitosamente",
+                        "schema": {
+                            "$ref": "#/definitions/Nodo"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Nodos"
+                ],
+                "summary": "Eliminar un nodo",
+                "description": "Eliminar un nodo",
+                "parameters":[
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID de Nodo",
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "El nodo fue eliminado exitosamente"
+                    }
+                }
+            }
+        },
+        "/sedes": {
+            "get": {
+                "tags": [
+                    "Sedes"
+                ],
+                "summary": "Obtener todas las sedes",
+                "description": "Obtener todas las sedes",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "ID de Sede",
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Sedes"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Sedes"
+                ],
+                "summary": "Enviar la informacion de una sede",
+                "description": "Enviar la informacion de una sede",
+                "parameters": [
+                    {
+                        "name": "Sede a guardar",
+                        "in": "body",
+                        "description": "Toda la informacion de una sede",
+                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/SedeAGuardar"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "La sede fue creada exitosamente"
+                    }
+                }
+            }
+        },
+        "/topicos": {
+            "get": {
+                "tags" : [
+                    "Topicos"
+                ],
+                "summary": "Obtiene todos los topicos registrados",
+                "description": "Obtiene todos los topicos registraos hasta el momento. Estos son utilizados por los cursos para describir el tema principal de este",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/DatoTopico"
+                        }
+                    }
+                }
+                
+            },
+            "post": {
+                "tags": [
+                    "Topicos"
+                ],
+                "summary": "Agrega un nuevo topico",
+                "description": "Agrega un nuevo topico para ser usado como tema de un curso",
+                "parameters": [
+                    {
+                        "name": "nombre",
+                        "in": "body",
+                        "description": "Nombre del nuevo topico",
+                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/PostTopico"
+                        }
+                    }
+
+                ],
+                "responses": {
+                    "200": {
+                        "description": "El topico fue creado exitosamente",
+                        "schema": {
+                            "$ref": "#/definitions/DatoTopico"
+                        }
+                    }
+                }
+            }
+        },
+        "/topicos/{id}": {
+            "get": {
+                "tags" : [
+                    "Topicos"
+                ],
+                "summary": "Obtiene el topico identificado por el id",
+                "description": "Obtiene solo un topico con el mismo id que el URL",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id del topico",
+                        "type": "integer"
+                    }                    
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/DatoTopico"
+                        }
+                    },
+                    "404":{
+                        "description": "Topico no encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Topicos"
+                ],
+                "summary": "Modifica un topico ya existente",
+                "description": "Busca el topico con el id del URL y lo modifica",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id del topico",
+                        "type": "integer"
+                    },
+                    {
+                        "name": "nombre",
+                        "in": "body",
+                        "description": "Nuevo nombre para el topico",
+                        "type": "string",
+                        "schema": {
+                            "$ref": "#/definitions/PostTopico"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "El topico fue editado exitosamente",
+                        "schema": {
+                            "$ref": "#/definitions/DatoTopico"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Topicos"
+                ],
+                "summary": "Elimina un topico en especifico",
+                "description": "Busca el topico con el id del URL y lo elimina",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id del topico",
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "El topico fue eliminado exitosamente"
+                    }
+                }
+                
+            }
+        }
+    },   
+    "definitions": {
+        "EstudianteDTO": {
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "uniqueItems": true
+                },
+                "dni": {
+                    "type": "string"
+                },
+                "tipoDNI": {
+                    "type": "string"
+                },
+                "nombre": {
+                    "type": "string"
+                },
+                "apellido": {
+                    "type": "string"
+                },
+                "nacionalidad": {
+                    "type": "string"
+                },
+                "fechaNacimiento": {
+                    "type": "string"
+                },
+                "correo": {
+                    "type": "string"
+                },
+                "correoOpcional": {
+                    "type": "string"
+                },
+                "celular": {
+                    "type": "string"
+                },
+                "linkedin": {
+                    "type": "string"
+                },
+                "zona": {
+                    "type": "string"
+                },
+                "detalle": {
+                    "type": "string"
+                },
+                "añoGraduacion": {
+                    "type": "integer"
+                },
+                "nombrePrimerTrabajo": {
+                    "type": "string"
+                },
+                "trabajaActualmente": {
+                    "type": "boolean"
+                },
+                "trabajaSistemas": {
+                    "type": "boolean"
+                },
+                "experienciaSistemas": {
+                    "type": "string"
+                },
+                "estudiosSistemas": {
+                    "type": "string"
+                },
+                "fechaActualTrabajo": {
+                    "type": "string"
+                },
+                "lugarActualTrabajo": {
+                    "type": "string"
+                },
+                "fechaPrimerEmpleo": {
+                    "type": "string"
+                },
+                "topico": {
+                    "type": "string"
+                },
+                "nivelInglesId": {
+                    "type": "integer",
+                    "$ref": "#/definitions/NivelIngles"
+                },
+                "estadoId": {
+                    "type": "integer",
+                    "$ref": "#/definitions/Estado"
+                },
+                "sedeId": {
+                    "type": "integer",
+                    "$ref": "#/definitions/Sede"
+                },
+                "nodoId": {
+                    "type": "integer",
+                    "$ref": "#/definitions/Nodo"
+                }
+            }
+        },
+        "Estudiante": {
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "uniqueItems": true
+                },
+                "dni": {
+                    "type": "string"
+                },
+                "tipoDNI": {
+                    "type": "string"
+                },
+                "nombre": {
+                    "type": "string"
+                },
+                "apellido": {
+                    "type": "string"
+                },
+                "nacionalidad": {
+                    "type": "string"
+                },
+                "fechaNacimiento": {
+                    "type": "string"
+                },
+                "correo": {
+                    "type": "string"
+                },
+                "correoOpcional": {
+                    "type": "string"
+                },
+                "celular": {
+                    "type": "string"
+                },
+                "linkedin": {
+                    "type": "string"
+                },
+                "zona": {
+                    "type": "string"
+                },
+                "detalle": {
+                    "type": "string"
+                },
+                "añoGraduacion": {
+                    "type": "integer"
+                },
+                "nombrePrimerTrabajo": {
+                    "type": "string"
+                },
+                "trabajaActualmente": {
+                    "type": "boolean"
+                },
+                "trabajaSistemas": {
+                    "type": "boolean"
+                },
+                "experienciaSistemas": {
+                    "type": "string"
+                },
+                "estudiosSistemas": {
+                    "type": "string"
+                },
+                "fechaActualTrabajo": {
+                    "type": "string"
+                },
+                "lugarActualTrabajo": {
+                    "type": "string"
+                },
+                "fechaPrimerEmpleo": {
+                    "type": "string"
+                },
+                "topico": {
+                    "type": "string"
+                },
+                "nivelInglesId": {
+                    "type": "integer",
+                    "$ref": "#/definitions/NivelIngles"
+                },
+                "estadoId": {
+                    "type": "integer",
+                    "$ref": "#/definitions/Estado"
+                },
+                "sedeId": {
+                    "type": "integer",
+                    "$ref": "#/definitions/Sede"
+                },
+                "nodoId": {
+                    "type": "integer",
+                    "$ref": "#/definitions/Nodo"
+                }
+            }
+        },
+        "EstudianteSinId": {
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "uniqueItems": true
+                },
+                "dni": {
+                    "type": "string"
+                },
+                "tipoDNI": {
+                    "type": "string"
+                },
+                "nombre": {
+                    "type": "string"
+                },
+                "apellido": {
+                    "type": "string"
+                },
+                "nacionalidad": {
+                    "type": "string"
+                },
+                "fechaNacimiento": {
+                    "type": "string"
+                },
+                "correo": {
+                    "type": "string"
+                },
+                "correoOpcional": {
+                    "type": "string"
+                },
+                "celular": {
+                    "type": "string"
+                },
+                "linkedin": {
+                    "type": "string"
+                },
+                "zona": {
+                    "type": "string"
+                },
+                "detalle": {
+                    "type": "string"
+                },
+                "añoGraduacion": {
+                    "type": "integer"
+                },
+                "nombrePrimerTrabajo": {
+                    "type": "string"
+                },
+                "trabajaActualmente": {
+                    "type": "boolean"
+                },
+                "trabajaSistemas": {
+                    "type": "boolean"
+                },
+                "experienciaSistemas": {
+                    "type": "string"
+                },
+                "estudiosSistemas": {
+                    "type": "string"
+                },
+                "fechaActualTrabajo": {
+                    "type": "string"
+                },
+                "lugarActualTrabajo": {
+                    "type": "string"
+                },
+                "fechaPrimerEmpleo": {
+                    "type": "string"
+                },
+                "topico": {
+                    "type": "string"
+                },
+                "nivelInglesId": {
+                    "type": "integer",
+                    "$ref": "#/definitions/NivelIngles"
+                },
+                "estadoId": {
+                    "type": "integer",
+                    "$ref": "#/definitions/Estado"
+                },
+                "sedeId": {
+                    "type": "integer",
+                    "$ref": "#/definitions/Sede"
+                },
+                "nodoId": {
+                    "type": "integer",
+                    "$ref": "#/definitions/Nodo"
+                }
+            }
+        },
+        "egresadesDesempleados": {
+            "type": "array",
+            "$ref": "#/definitions/EstudianteDTO"
+        },
+        "Nodo": {
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "uniqueItems": true
+                },
+                "nombre": {
+                    "type": "string"
+                }
+            }
+        },
+        "Sede": {
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "uniqueItems": true
+                },
+                "nombre": {
+                    "type": "string"
+                },
+                "NodoId": {
+                    "type": "integer",
+                    "$ref": "#/definitions/Nodo"
+                }
+            }
+        },
+        "Curso": {
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "uniqueItems": true
+                },
+                "horario": {
+                    "type": "string"
+                },
+                "profesores": {
+                    "type": "string"
+                },
+                "notas": {
+                    "type": "string"
+                },
+                "anio": {
+                    "type": "integer"
+                },
+                "periodo": {
+                    "type": "string",
+                    "$ref": "#/definitions/Periodo"
+                },
+                "TopicoId": {
+                    "type": "integer"
+                },
+                "estado": {
+                    "type": "boolean"
+                },
+                "NodoId": {
+                    "type": "integer",
+                    "$ref": "#/definitions/Nodo"
+                },
+                "SedeId": {
+                    "type": "integer",
+                    "$ref": "#/definitions/Sede"
+                },
+                "topico": {
+                    "type": "string"
+                }
+            }
+        },
+        "Cursos": {
+            "type": "array",
+            "$ref": "#/definitions/Curso"
+        },
+        "CursoAGuardar": {
+            "properties": {
+                "NodoId": {
+                    "type": "integer"
+                },
+                "SedeId": {
+                    "type": "integer"
+                },
+                "Topico": {
+                    "type": "integer"
+                }
+            }
+        },
+        "Topico": {
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "uniqueItems": true
+                },
+                "nombre": {
+                    "type": "string"
+                }
+            }
+        },
+        "Periodo": {
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "uniqueItems": true
+                },
+                "anio": {
+                    "type": "integer"
+                },
+                "periodo": {
+                    "type": "string"
+                },
+                "TopicoId": {
+                    "type": "integer",
+                    "$ref": "#/definitions/Topico"
+                },
+                "estado": {
+                    "type": "boolean"
+                },
+                "mensajeDeCierre": {
+                    "type": "string"
+                }
+            }
+        },
+        "Periodos": {
+            "type": "array",
+            "$ref": "#/definitions/Periodo"
+        },
+        "PeriodoAGuardar": {
+            "properties": {
+                "anio": {
+                    "type": "integer"
+                },
+                "periodo": {
+                    "type": "string"
+                },
+                "estado": {
+                    "type": "boolean"
+                },
+                "TopicoId": {
+                    "type": "number"
+                }
+            }
+        },
+        "Estado": {
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "uniqueItems": true
+                },
+                "nombre": {
+                    "type": "string"
+                }
+            }
+        },
+        "Estados": {
+            "type": "array",
+            "$ref": "#/definitions/Estado"
+        },
+        "NivelIngles": {
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "uniqueItems": true
+                },
+                "nombre": {
+                    "type": "string"
+                }
+            }
+        },
+        "NivelesIngles": {
+            "type": "array",
+            "$ref": "#/definitions/NivelIngles"
+        },
+        "Inscripto": {
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "uniqueItems": true
+                },
+                "estudianteId": {
+                    "type": "integer",
+                    "$ref": "#/definitions/Estudiante"
+                },
+                "cursoId": {
+                    "type": "integer",
+                    "$ref": "#/definitions/Curso"
+                }
+            }
+        },
+        "Inscriptos": {
+            "type": "array",
+            "$ref": "#/definitions/Inscripto"
+        },
+        "Nodos": {
+            "type": "array",
+            "$ref": "#/definitions/Nodo"
+        },
+        "NodoAGuardar": {
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "uniqueItems": true
+                },
+                "nombre": {
+                    "type": "string"
+                }
+            }
+        },
+        "Sedes": {
+            "type": "array",
+            "$ref": "#/definitions/Sede"
+        },
+        "SedeAGuardar": {
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "uniqueItems": true
+                },
+                "nombre": {
+                    "type": "string"
+                },
+                "NodoId": {
+                    "type": "integer",
+                    "$ref": "#/definitions/Nodo"
+                }
+            }
+        },
+        "DatoTopico": {
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "uniqueItems": true
+                },
+                "nombre": {
+                    "type": "string"
+                }
+            }
+        },
+        "PostTopico": {
+            "properties": {
+                "nombre": {
+                    "type": "string"
+                }
+            }
+        },
+        "CursoEditar": {
+            "properties": {
+                "NodoId": {
+                    "type":"integer"
+                },
+                "SedeId": {
+                    "type":"integer"
+                },
+                "horario": {
+                    "type": "string"
+                },
+                "profesores": {
+                    "type": "string"
+                },
+                "notas": {
+                    "type": "string"
+                },
+                "anio": {
+                    "type": "integer"
+                },
+                "periodo": {
+                    "type": "integer"
+                },
+                "TopicoId": {
+                    "type": "integer"
+                },
+                "estado": {
+                    "type": "boolean"
+                }
+            }
+        }
+        
+    }
+}
