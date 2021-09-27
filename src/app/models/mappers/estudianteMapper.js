@@ -9,8 +9,7 @@ class EstudianteMapper {
 
     static obtenerDtoDeListaEstudiantes(listaEstudiantes) {
         return listaEstudiantes.map((estudiante) => {
-            const estudianteDTO = new EstudianteDTO(estudiante).obtenerDtoDeEstudiante();
-            return estudianteDTO;
+            return new EstudianteDTO(estudiante).obtenerDtoDeEstudiante();
         });
     }
 
