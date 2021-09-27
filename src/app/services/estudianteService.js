@@ -545,6 +545,7 @@ const EstudianteService = {
     }
     let todosLosEstudiantes = await Estudiante.findAll({
       where: {
+        [Op.and]: [parameters],
         [Op.or]: [{ estadoId: 2 }, { estadoId: 5 }]
       },
       attributes: { exclude: ["sedeId", "nodoId", "nivelInglesId"] },
@@ -571,8 +572,7 @@ const EstudianteService = {
           model: NivelIngles,
           as: "nivelIngles"
         }
-      ],
-      where: parameters
+      ]
     });
     todosLosEstudiantes = EstudianteMapper.obtenerDtoDeListaEstudiantes(
       todosLosEstudiantes

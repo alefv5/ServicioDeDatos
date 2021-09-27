@@ -9,7 +9,8 @@
     "test": "jest",
     "create-schema": "npx sequelize-cli db:migrate",
     "seeder": "npx sequelize-cli db:seed:all",
-    "heroku-postbuild": "npm run -s create-schema"
+    "heroku-postbuild": "npm run -s create-schema",
+    "sonar": "node sonar-scanner.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
     "express": "^4.17.1",
     "pg": "^8.3.3",
     "sequelize": "^6.3.5",
+    "sonarqube-scanner": "^2.8.1",
     "swagger-ui-express": "^4.1.4"
   },
   "devDependencies": {
