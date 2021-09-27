@@ -1,5 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-  const NivelIngles = sequelize.define('NivelIngles', {
+  
+  return sequelize.define('NivelIngles', {
     'id': {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -7,5 +8,4 @@ module.exports = (sequelize, DataTypes) => {
     },
     'nombre': DataTypes.STRING
   });
-  return NivelIngles;
 }
