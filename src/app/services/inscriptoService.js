@@ -60,7 +60,7 @@ const InscriptoService = {
                 resultado.push({ Operacion: "El estudiante ya se encuentra inscripto a un curso"});
                 codigo = 400;
             }     
-        };  
+        }  
         return {message: resultado, result: codigo}; 
     },
 
