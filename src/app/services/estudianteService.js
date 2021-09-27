@@ -405,6 +405,7 @@ const EstudianteService = {
     }
     let todosLosEstudiantes = await Estudiante.findAll({
       where: {
+        parameters,
         estadoId: 2
       },
       attributes: { exclude: ["sedeId", "nodoId", "nivelInglesId"] },
@@ -434,7 +435,7 @@ const EstudianteService = {
       ],
       offset: pagina * 10,
       limit: 10,
-      where: parameters,
+      
       order: [[criterioDeOrden, sentidoDeOrden]]
     });
     todosLosEstudiantes = EstudianteMapper.obtenerDtoDeListaEstudiantes(
@@ -498,6 +499,7 @@ const EstudianteService = {
     }
     let todosLosEstudiantes = await Estudiante.findAll({
       where: {
+        [Op.and]: [parameters],
         [Op.or]: [{ estadoId: 2 }, { estadoId: 3 }, { estadoId: 5 }]
       },
       attributes: { exclude: ["sedeId", "nodoId", "nivelInglesId"] },
@@ -525,7 +527,7 @@ const EstudianteService = {
           as: "nivelIngles"
         }
       ],
-      //where: parameters
+      
     });
     todosLosEstudiantes = EstudianteMapper.obtenerDtoDeListaEstudiantes(
       todosLosEstudiantes
