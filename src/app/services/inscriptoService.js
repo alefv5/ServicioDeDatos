@@ -44,7 +44,7 @@ const InscriptoService = {
                     }
                     else{
                         var estado = (estudiante.estadoId === 2) ? 5 : 1;
-                        estudianteActualizado = {
+                        const estudianteActualizado = {
                             "nodoId": curso.NodoId,
                             "sedeId": curso.SedeId,
                             "estadoId": estado,
