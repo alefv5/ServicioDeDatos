@@ -16,12 +16,9 @@ const NodoService = {
     },
 
     crearNodo: async(request, response) => {
-        try {
-            const nodo = await Nodo.create(request.body);
-            return { message: "El nodo fue creado exitosamente", result: nodo };
-        } catch (error) {
-            throw error;
-        }
+        const nodo = await Nodo.create(request.body);
+        return { message: "El nodo fue creado exitosamente", result: nodo };
+
     },
     
     eliminarNodo: async(request, response) => {
