@@ -25,7 +25,6 @@ const SedeService = {
         try {
             await Sede.update(request.body, { where: { id: request.params.id } });
             let sede = await Sede.findByPk(request.params.id);
-            // sede.nombre = request.params.nombre;
             return { message: "La sede fue actualizada exitosamente", Sede: sede };
         } catch (error) {
             throw error;
