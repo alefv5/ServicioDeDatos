@@ -25,22 +25,19 @@ const topicoService = {
     },
     eliminarTopico: async (request, response) => {
         let message='';
-        try {
-          const resultado = await Topico.destroy({
-            where: { id: request.params.id }
-          });
-          if(resultado == 0){
-            message= `No se encontro ningun topico con el id: ${request.params.id}`;
-          } else {
-            message= "El Topico fue eliminado exitosamente";
-          }
+        const resultado = await Topico.destroy({
+          where: { id: request.params.id }
+        });
+        if(resultado == 0){
+          message= `No se encontro ningun topico con el id: ${request.params.id}`;
+        } else {
+          message= "El Topico fue eliminado exitosamente";
+        }
         return {
           message,
           result: resultado
         };            
-        } catch (error) {
-          throw error;
-        }
+
     },
 };
 
