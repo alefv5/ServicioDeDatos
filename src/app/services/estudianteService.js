@@ -318,17 +318,13 @@ const EstudianteService = {
   },
 
   eliminarEstudiante: async (request, response) => {
-    try {
-      const resultado = await Estudiante.destroy({
-        where: { id: request.params.id }
-      });
-      return {
-        message: "El Estudiante  fue eliminado exitosamente",
-        result: resultado
-      };
-    } catch (error) {
-      throw error;
-    }
+    const resultado = await Estudiante.destroy({
+      where: { id: request.params.id }
+    });
+    return {
+      message: "El Estudiante  fue eliminado exitosamente",
+      result: resultado
+    };
   },
 
   encontrarEstudiantesEgresades: async parameters => {
