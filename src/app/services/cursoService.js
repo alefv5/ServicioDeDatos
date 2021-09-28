@@ -106,7 +106,12 @@ const CursoService = {
         }
     },
 
-    editarCurso: async(request, response) => {await Curso.update(request.body, { where: { id: request.params.id } });
+<<<<<<< HEAD
+    editarCurso: async(request, response) => {const resultado = await Curso.update(request.body, { where: { id: request.params.id } });
+=======
+    editarCurso: async(request, response) => {
+        await Curso.update(request.body, { where: { id: request.params.id } });
+>>>>>>> 752b0417de334bd3ca81d5cbfa0f9ca7b2d12642
         let curso = await Curso.findByPk(request.params.id);
         return { message: "El curso fue editado exitosamente", Curso: curso };
     },
