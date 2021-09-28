@@ -92,12 +92,8 @@ const CursoService = {
     },
 
     crearCurso: async(request, response) => {
-        try {
-            const curso = await Curso.create(request.body);
-            return { message: "El curso fue creado exitosamente", result: curso};
-        } catch (error) {
-            throw error;
-        }
+      const curso = await Curso.create(request.body);
+      return { message: "El curso fue creado exitosamente", result: curso};
     },
 
     editarCurso: async(request, response) => {
