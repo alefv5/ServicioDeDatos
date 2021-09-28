@@ -266,7 +266,7 @@ const EstudianteService = {
         } else {
           estudianteDTO.estadoId = 3;
         }
-        return await EstudianteMapper.obtenerEstudianteDeDTO(estudianteDTO);
+        return EstudianteMapper.obtenerEstudianteDeDTO(estudianteDTO);
       })
     );
     await Estudiante.bulkCreate(estudiantes, { validate: true });
