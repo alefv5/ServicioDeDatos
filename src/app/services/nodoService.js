@@ -22,12 +22,8 @@ const NodoService = {
     },
     
     eliminarNodo: async(request, response) => {
-        try {
-            const nodo = await Nodo.destroy({ where: { id: request.params.id } });
-            return { message: "El nodo fue eliminado exitosamente", result: nodo };
-        } catch (error) {
-            throw error;
-        }
+        const nodo = await Nodo.destroy({ where: { id: request.params.id } });
+        return { message: "El nodo fue eliminado exitosamente", result: nodo };
     },
 }
 
