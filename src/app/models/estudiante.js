@@ -1,11 +1,4 @@
 module.exports = (sequelize, DataTypes) => {
-    function (models) {
-        Estudiante.belongsTo(models.Sede, { foreignKey: 'sedeId', as: 'sede' }),
-        Estudiante.belongsTo(models.Nodo, { foreignKey: 'nodoId', as: 'nodo' }),
-        Estudiante.belongsTo(models.Estado, { foreignKey: 'estadoId', as: 'estado' }),
-        Estudiante.belongsTo(models.NivelIngles, { foreignKey: 'nivelInglesId', as: 'nivelIngles' })
-
-    };
     const Estudiante = sequelize.define('Estudiante', {
         'id': {
             type: DataTypes.INTEGER,
@@ -41,12 +34,11 @@ module.exports = (sequelize, DataTypes) => {
         'sedeId': DataTypes.INTEGER,
         'nodoId': DataTypes.INTEGER,
     });
-    Estudiante.associate = function(models) {
-        Estudiante.belongsTo(models.Sede, { foreignKey: 'sedeId', as: 'sede' }),
-        Estudiante.belongsTo(models.Nodo, { foreignKey: 'nodoId', as: 'nodo' }),
-        Estudiante.belongsTo(models.Estado, { foreignKey: 'estadoId', as: 'estado' }),
-        Estudiante.belongsTo(models.NivelIngles, { foreignKey: 'nivelInglesId', as: 'nivelIngles' })
-
+    Estudiante.associate = function(models){
+        Estudiante.belongsTo(models.Sede, {foreignKey: 'sedeId', as: 'sede' })
+        Estudiante.belongsTo(models.Nodo, {foreignKey: 'nodoId', as: 'nodo' })
+        Estudiante.belongsTo(models.Estado, {foreignKey: 'estadoId', as: 'estado' })
+        Estudiante.belongsTo(models.NivelIngles, {foreignKey: 'nivelInglesId', as: 'nivelIngles' })
     };
     return Estudiante;
 }
