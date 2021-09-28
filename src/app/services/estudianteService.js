@@ -274,28 +274,24 @@ const EstudianteService = {
   },
 
   actualizarEstudiante: async (request, response) => {
-    try {
-      let body = {}
-      if (request.body.estadoId !== 1) {
-        if (request.body.trabajaActualmente === true)
-          body = { ...request.body, estadoId: 3 }
-        else
-          body = { ...request.body, estadoId: 2 }
-      }
+    let body = {}
+    if (request.body.estadoId !== 1) {
+      if (request.body.trabajaActualmente === true)
+        body = { ...request.body, estadoId: 3 }
       else
-        body = { ...request.body, estadoId: 1 }
-
-      const resultado = await Estudiante.update(body, {
-        where: { id: request.params.id }
-      });
-      let estudiante = await Estudiante.findByPk(request.params.id);
-      return {
-        message: "El estudiante fue actualizado exitosamente",
-        Estudiante: estudiante
-      };
-    } catch (error) {
-      throw error;
+        body = { ...request.body, estadoId: 2 }
     }
+    else
+      body = { ...request.body, estadoId: 1 }
+
+    await Estudiante.update(body, {
+      where: { id: request.params.id }
+    });
+    let estudiante = await Estudiante.findByPk(request.params.id);
+    return {
+      message: "El estudiante fue actualizado exitosamente",
+      Estudiante: estudiante
+    };
   },
 
   crearEstudiante: async (request, response) => {
