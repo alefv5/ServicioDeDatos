@@ -22,13 +22,10 @@ const SedeService = {
     },
 
     actualizarSede: async(request, response) => {
-        try {
-            await Sede.update(request.body, { where: { id: request.params.id } });
-            let sede = await Sede.findByPk(request.params.id);
-            return { message: "La sede fue actualizada exitosamente", Sede: sede };
-        } catch (error) {
-            throw error;
-        }
+        await Sede.update(request.body, { where: { id: request.params.id } });
+        let sede = await Sede.findByPk(request.params.id);
+        return { message: "La sede fue actualizada exitosamente", Sede: sede };
+
     },
 
     crearSede: async(request, response) => {
