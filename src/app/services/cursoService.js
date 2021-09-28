@@ -34,37 +34,33 @@ const CursoService = {
     },
     
     encontrarInscriptesDeUnCurso: async (idCurso) => {
-        try {
-          const curso = await Inscripto.findAll({
-            attributes: { exclude: ["cursoId", "estudianteId"] },
-            where: { cursoId: Number(idCurso) },
+      const curso = await Inscripto.findAll({
+        attributes: { exclude: ["cursoId", "estudianteId"] },
+        where: { cursoId: Number(idCurso) },
+        include: [
+          {
+            model: Estudiante,
+            as: "estudiante",
+            // where: { estadoId: 1 },
+            attributes: { exclude: ["nodoId", "sedeId", "nivelInglesId"] },
             include: [
               {
-                model: Estudiante,
-                as: "estudiante",
-               // where: { estadoId: 1 },
-                attributes: { exclude: ["nodoId", "sedeId", "nivelInglesId"] },
-                include: [
-                  {
-                    model: Nodo,
-                    as: "nodo"
-                  },
-                  {
-                    model: Sede,
-                    as: "sede"
-                  },
-                  {
-                    model: NivelIngles,
-                    as: "nivelIngles"
-                  }
-                ]
+                model: Nodo,
+                as: "nodo"
+              },
+              {
+                model: Sede,
+                as: "sede"
+              },
+              {
+                model: NivelIngles,
+                as: "nivelIngles"
               }
             ]
-          });
-          return { response: curso };
-        } catch (error) {
-          throw error;
-        }
+          }
+        ]
+      });
+      return { response: curso };
     },
 
     encontrarCursoPorId: async(cursoId) => {
