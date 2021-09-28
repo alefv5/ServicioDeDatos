@@ -299,30 +299,26 @@ const EstudianteService = {
   },
 
   crearEstudiante: async (request, response) => {
-    try {
-      const estudiante = request.body;
-      let resultado = "";
-      await Estudiante.count({
-        where: { nombre: estudiante.nombre, apellido: estudiante.apellido }
-      }).then(async count => {
-        if (count != 0) {
-          resultado = await Estudiante.update(estudiante, {
-            where: {
-              nombre: estudiante.nombre,
-              apellido: estudiante.apellido
-            }
-          });
-        } else {
-          resultado = await Estudiante.create(estudiante);
-        }
-      });
-      return {
-        message: "El estudiante fue creado exitosamente",
-        result: resultado
-      };
-    } catch (error) {
-      throw error;
-    }
+    const estudiante = request.body;
+    let resultado = "";
+    await Estudiante.count({
+      where: { nombre: estudiante.nombre, apellido: estudiante.apellido }
+    }).then(async count => {
+      if (count != 0) {
+        resultado = await Estudiante.update(estudiante, {
+          where: {
+            nombre: estudiante.nombre,
+            apellido: estudiante.apellido
+          }
+        });
+      } else {
+        resultado = await Estudiante.create(estudiante);
+      }
+    });
+    return {
+      message: "El estudiante fue creado exitosamente",
+      result: resultado
+    };
   },
 
   eliminarEstudiante: async (request, response) => {
