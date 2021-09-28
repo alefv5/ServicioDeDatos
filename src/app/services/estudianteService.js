@@ -604,6 +604,7 @@ const EstudianteService = {
     var estudiantes = solicitud.body.estudiantes;
     var estado = solicitud.body.estado;
     var resultado = [];
+    let codigo = 200;
     for (const estudiante of estudiantes) {
       let estudianteEncontrado = await Estudiante.findByPk(estudiante.id);
       if (estudianteEncontrado === null) {
