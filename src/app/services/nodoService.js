@@ -10,12 +10,9 @@ const NodoService = {
     },
 
     actualizarNodo: async(request, response) => {
-        try {
-            const nodo = await Nodo.findByPk(request.params.id);
-            return { message: "El nodo fue actualizado exitosamente", Nodo: nodo };
-        } catch (error) {
-            throw error;
-        }
+        const nodo = await Nodo.findByPk(request.params.id);
+        return { message: "El nodo fue actualizado exitosamente", Nodo: nodo };
+
     },
 
     crearNodo: async(request, response) => {
