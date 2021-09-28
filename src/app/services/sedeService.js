@@ -29,12 +29,9 @@ const SedeService = {
     },
 
     crearSede: async(request, response) => {
-        try {
-            const sede = await Sede.create(request.body);
-            return { message: "La sede fue creada exitosamente", result: sede };
-        } catch (error) {
-            throw error;
-        }
+        const sede = await Sede.create(request.body);
+        return { message: "La sede fue creada exitosamente", result: sede };
+
     },
     
     eliminarSede: async(request, response) => {
