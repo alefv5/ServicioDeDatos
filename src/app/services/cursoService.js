@@ -7,7 +7,6 @@ const CursoService = {
     },
     
     encontrarCursos: async(parametros) => {
-        
         let todosLosCursos = await Curso.findAll({
             where: parametros,
             attributes: {exclude: ['NodoId','SedeId']},
