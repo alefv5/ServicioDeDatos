@@ -573,7 +573,6 @@ const EstudianteService = {
     todosLosEstudiantes = EstudianteMapper.obtenerDtoDeListaEstudiantes(
       todosLosEstudiantes
     );
-    let TodesLosAlumnes = [];
     if (parameters.topico) {
       todosLosTopicos = await topicoService.encontrarTodosLosTopicos();
       todosLosTopicos = todosLosTopicos.response.filter(topico => topico.nombre == parameters.topico);
@@ -600,9 +599,6 @@ const EstudianteService = {
           resultadoEstudiantes.push(estudianteAGuardar);
         }
       });
-      TodesLosAlumnes = EstudianteMapper.obtenerDtoDeListaEstudiantes(
-        TodesLosAlumnes
-      );
       return { response: resultadoEstudiantes };
     }
     return { response: todosLosEstudiantes };
