@@ -35,12 +35,11 @@ const CursoService = {
     encontrarInscriptesDeUnCurso: async (idCurso) => {
       const curso = await Inscripto.findAll({
         attributes: { exclude: ["cursoId", "estudianteId"] },
-        where: { cursoId: Number(idCurso) },
+        where: { cursoId: Number(idCurso), estadoId: 1 },
         include: [
           {
             model: Estudiante,
             as: "estudiante",
-            // where: { estadoId: 1 },
             attributes: { exclude: ["nodoId", "sedeId", "nivelInglesId"] },
             include: [
               {
