@@ -571,7 +571,7 @@ const EstudianteService = {
       const topicoId = todosLosTopicos[0].id
       const cursos = await cursoService.encontrarCursosPorTopicoId(topicoId);
       let estudiantes = [];
-      for (let i = 0; i < cursos.respuesta.length; i++) {
+      for (let i of cursos.respuesta) {
         const inscriptes = await InscriptoService.obtenerInscriptosPorIdCurso(cursos.respuesta[i].id);
         estudiantes = estudiantes.concat(inscriptes.response);
       }
