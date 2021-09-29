@@ -266,7 +266,7 @@ const EstudianteService = {
         } else {
           estudianteDTO.estadoId = 3;
         }
-        return await EstudianteMapper.obtenerEstudianteDeDTO(estudianteDTO);
+        return EstudianteMapper.obtenerEstudianteDeDTO(estudianteDTO);
       })
     );
     await Estudiante.bulkCreate(estudiantes, { validate: true });
@@ -584,10 +584,10 @@ const EstudianteService = {
           }
         })
         if (!existe) {
-          const { nivelIngles, nodo, ...estudianteParseado } = estudiante.estudiante.dataValues;
+          const { niveldeIngles, nodo, ...estudianteParseado } = estudiante.estudiante.dataValues;
           let estudianteAGuardar = { ...estudianteParseado };
           estudianteAGuardar.nodo = nodo.nombre;
-          estudianteAGuardar.nivelIngles = nivelIngles.nombre;
+          estudianteAGuardar.niveldeIngles = niveldeIngles.nombre;
           resultadoEstudiantes.push(estudianteAGuardar);
         }
       });
