@@ -39,6 +39,7 @@ const SedeService = {
             const sede = await Sede.destroy({ where: { id: request.params.id } });
             return { message: "La sede fue eliminada exitosamente", result: sede };
         } catch (error) {
+            doSomething();
             throw error;
         }
     },
