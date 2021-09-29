@@ -566,7 +566,7 @@ const EstudianteService = {
       todosLosEstudiantes
     );
     if (parameters.topico) {
-      todosLosTopicos = await topicoService.encontrarTodosLosTopicos();
+      var todosLosTopicos = await topicoService.encontrarTodosLosTopicos();
       todosLosTopicos = todosLosTopicos.response.filter(topico => topico.nombre == parameters.topico);
       const topicoId = todosLosTopicos[0].id
       const cursos = await cursoService.encontrarCursosPorTopicoId(topicoId);
