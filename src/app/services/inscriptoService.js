@@ -31,35 +31,35 @@ const InscriptoService = {
                     cursoId: inscripto.cursoId
                 }
             });
-            if(estaInscripto.length == 0){
-                if(estudiante == null){
-                    resultado.push({ Operacion: "El estudiante con id " + inscripto.estudianteId + " no existe"});
-                    codigo = 400;
-                }
-                else{
-                    let curso = await Curso.findByPk(inscripto.cursoId);
-                    if(curso == null){
-                        resultado.push({ Operacion: "El curso con id " + inscripto.cursoId + " no existe"});
-                        codigo = 400;
-                    }
-                    else{
-                        var estado = (estudiante.estadoId === 2) ? 5 : 1;
-                        let estudianteActualizado = {
-                            "nodoId": curso.NodoId,
-                            "sedeId": curso.SedeId,
-                            "estadoId": estado,
-                        }
-                        await Estudiante.update(estudianteActualizado, { where: { id: inscripto.estudianteId } });
-                        await Inscripto.create(inscripto);
-                        resultado.push({ Operacion: "Se registro correctamente"});
-                        codigo = 200;
-                    }
-                }
-            }
-            else{
+            if (estaInscripto.length != 0){
                 resultado.push({ Operacion: "El estudiante ya se encuentra inscripto a un curso"});
                 codigo = 400;
-            }     
+                return {message: resultado, result: codigo}; 
+            }
+            if(estudiante == null){
+                resultado.push({ Operacion: "El estudiante con id " + inscripto.estudianteId + " no existe"});
+                codigo = 400;
+            }
+            else{
+                let curso = await Curso.findByPk(inscripto.cursoId);
+                if(curso == null){
+                    resultado.push({ Operacion: "El curso con id " + inscripto.cursoId + " no existe"});
+                    codigo = 400;
+
+                }
+                else{
+                    var estado = (estudiante.estadoId === 2) ? 5 : 1;
+                    let estudianteActualizado = {
+                        "nodoId": curso.NodoId,
+                        "sedeId": curso.SedeId,
+                        "estadoId": estado,
+                    }
+                    await Estudiante.update(estudianteActualizado, { where: { id: inscripto.estudianteId } });
+                    await Inscripto.create(inscripto);
+                    resultado.push({ Operacion: "Se registro correctamente"});
+                    codigo = 200;
+                }
+            }
         }  
         return {message: resultado, result: codigo}; 
     },
