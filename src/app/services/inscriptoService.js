@@ -44,7 +44,7 @@ const InscriptoService = {
                     }
                     else{
                         var estado = (estudiante.estadoId === 2) ? 5 : 1;
-                        var estudianteActualizado = {
+                        let estudianteActualizado = {
                             "nodoId": curso.NodoId,
                             "sedeId": curso.SedeId,
                             "estadoId": estado,
@@ -89,7 +89,7 @@ const InscriptoService = {
                 }
                 else{
                     var estado = (estudiante.estadoId === 2) ? 5 : 1;
-                    var estudianteActualizado = {
+                    let estudianteActualizado = {
                         "nodoId": curso.NodoId,
                         "sedeId": curso.SedeId,
                         "estadoId": estado,
