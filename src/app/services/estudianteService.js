@@ -610,7 +610,7 @@ const EstudianteService = {
         codigo = 400;
       } else {
         estado = (estudianteEncontrado.estadoId === 5 && estado === 4) ? 2 : estado;
-        estudianteActualizado = {
+        var estudianteActualizado = {
           id: estudiante.id,
           estadoId: estado
         };
