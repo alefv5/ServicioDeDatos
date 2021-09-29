@@ -63,7 +63,9 @@ class Application {
     }
 
     setUpCors() {
-        this.express.use(cors());
+        this.express.use(cors({
+            origin: 'http://example.com',
+          }));
     }
 
 }
